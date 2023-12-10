@@ -1,0 +1,7 @@
+<style type="text/css">
+    /*定义标题标签居中对齐*/ 
+    h2{ text-align:center;}   
+    /*定义div标签样式*/
+    div{ border: 3px solid #CCC; width: 1000px;  height: 200px; color:red;
+         text-align:center;}
+</style>

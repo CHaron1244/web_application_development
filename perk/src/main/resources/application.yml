@@ -1,0 +1,73 @@
+alipay:
+  appId: 9021000131671236
+  appPrivateKey: MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQCgfwuOlfO2nkGm28ucwviKWN0dFxGya4hJOqdHq/7D/gzTE7m1XvqkZHFsFLf7chhRoSNnt3Q+gyTqx4CFkKij8carANQEPxNajrHvOWM6moU6WAr6cxRUH1It3IAluZG50/gVYmDl8zUXWw5byV34EzFbJhym7kLIsOQYNrPQ7TVk2bqLjrErcbEcC2HNsv5TOy7Mnut0gPokI1RZfFOBVHraApKF1IzKcL5R2Yt8yfIKZtQmmrHMUWKWvLkdrK8OUmTbum2uquT5yT7vc03E7T+ZB2q6YaxqdeU+d5ugSYb9r9gDfUUOScKMT94jFSGrO5/95n9k9gZEvLU0tyKxAgMBAAECggEBAIs5ijn3ZIIPSJ5JXpivHVFOAwmgIG7pD0GPCtuGnStBr7hPDTMDoGOI6kc6tdr+v4/YO9FV+BXeR+EOjTPQKCqHqrJetoy0dsKAtGP0IVsN/fJ9u5BE0eajgPNdqyCOmJZeBX/vZmUzk+Odzpfa15RCefc62XIJj49uu38xvMzIB9WOXcbQ66f3i1emWOGYNjPnS0IDI92Sc6kl0KtSCC+T6u2/hPZ3bKSImobiJH5/tRf1kUeKRUrLBkvrFTJPQGpV7t+GQ6xhbfCIuqyT2ZKLrK5CNkb9GZwypuhoSMnxdRwh23Zz81weli2dFtGqGC0OWCNSCDKAVKd2lq2y1Z0CgYEA3xk2VZBkM6vcxl8Xaru8Mbf42R6nlp/CRbQq5lKONhwW8w1QPc5sylucNyu2k9yuAA4QYnPY9qJAa1CRP0OIuDNLRB7b0fc7e9rzK4XWJS+GddcvAkCsvEhnOu7847Xy62cmuMettmw6sPN6KJd1S9YBS0uk6P+1F17ptjBHcmMCgYEAuCpeg9yjEuwBBy7DYBgIn36y6LAFr/7cLQi0nGchCXZjJpchpFDltTiocqK30jvwZOK+gLu5aQr3livzn/DzXoDCV/gxAyN2MNHSq64aJvAvdEk8zNCZdmgYg0qtpX4aZd59PGTG9jcYSPgwaT9pVziu6aFInB3OguPGNP5VGNsCgYEAjQtqf3PW9Zfs7vkFW/QuiZxO1i18NEzyTJEYIh8FS448sBK1rS2JN/Hs9DBNsHNvChfaIfQtsddoNLBt83olwJalOf7saHUOhUIqRFTLyxydvHh7fsgWrL51jRu0g93vIwZGw8FxwIfyHxb/HxSKEpTMoqbDLo8jFRBrX0RslxMCgYEAhBJme5wEGrLDPfpsRIKX1IHRHgv12DQmg+lFVRCkYZvUGT2y85rMUT0TmDpXJ16y1DbDtaBqpAkoazqT2XS7o18lgF7OD1kkDni640HVIW2IKpXHE37ZP1ABnE4234LivYFkQKZpBPOX5+SNGz1Ndy6ASa3PW54IlldwslpefpcCgYEAgWnOJoeofuNa4cNOjfqErfuu1Q53d4cokMH3b1kf7u8v7zlST64wMGXDnlh4Bi8paAsJVIDpbsw8tOJtJFKcyBkxeEQVVc1E0spkm6pgl7+N1+hoYQNjSS5+80L2p9ITHjWRhSIOw5WMW3wA/quy/TboiTi7nkvBTNSh1rs5JSM=
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoH8LjpXztp5BptvLnML4iljdHRcRsmuISTqnR6v+w/4M0xO5tV76pGRxbBS3+3IYUaEjZ7d0PoMk6seAhZCoo/HGqwDUBD8TWo6x7zljOpqFOlgK+nMUVB9SLdyAJbmRudP4FWJg5fM1F1sOW8ld+BMxWyYcpu5CyLDkGDaz0O01ZNm6i46xK3GxHAthzbL+UzsuzJ7rdID6JCNUWXxTgVR62gKShdSMynC+UdmLfMnyCmbUJpqxzFFilry5HayvDlJk27ptrqrk+ck+73NNxO0/mQdqumGsanXlPneboEmG/a/YA31FDknCjE/eIxUhqzuf/eZ/ZPYGRLy1NLcisQIDAQAB
+  notifyUrl: http://114.132.219.217:9090/#/alipay/success # modify 在Spring Boot的YAML配置文件中，当你部署到服务器上后，localhost不会自动变成服务器的IP地址
+  returnUrl: http://114.132.219.217/#/cart # 支付完成回到购物车界面 # modify（localhost 和 # 配合前端hash/history）
+  # 签名方式
+  signType: RSA2
+  # 字符编码格式
+  charset: utf-8
+  # 支付宝网关，在沙箱应用中获取
+  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+
+# 开启驼峰映射
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 9090
+
+mybatis-plus:
+  type-aliases-package: com.peanut.entity
+  mapper-locations: classpath:mappers
+
+
+# 原来application.property
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://114.132.219.217:3306/shop # modify
+    username: shop # modify(宝塔数据库的用户名是shop)
+    password: 030419
+  mail:
+    from: charon12448@163.com # 发送邮件的邮箱地址
+    host: smtp.163.com # 发送邮件服务器，例如：smtp.example.com
+    username: charon12448@163.com # 发送邮件的邮箱用户名
+    password: MAQJPLXIPIZLLQHU # 客户端授权码，不是邮箱密码，例如网易邮箱需要自行设置
+    properties:
+      mail:
+        smtp:
+          auth: true
+          port: 465# 邮件服务器的端口号，一般为465或994
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+    default-encoding: utf-8
+
+#  allowPublicKeyRetrieval=true：允许从服务器检索公钥。
+#  useUnicode=true：使用Unicode字符集进行通信。
+#  characterEncoding=utf-8：使用UTF-8字符编码。
+#  allowMultiQueries=true：允许同时执行多个查询。
+#  useSSL=false：不使用SSL加密连接。
+#  serverTimezone=GMT%2b8：设置服务器时区为GMT+8（东八区
+
+file:
+  ip: localhost
+#  这个属性通常被用于指定文件服务的IP地址，以便客户端能够访问远程文件系统。
+########################################################################
+# 原来application.yml
+#spring:
+#  mail:
+#    host: #发送邮件服务器
+#    username: #发送邮件的邮箱地址
+#    password:  #客户端授权码，不是邮箱密码,网易的是自己设置的
+#    properties.mail.smtp.port: #465或者994
+#    from: # 发送邮件的地址，和上面username一致
+#    properties.mail.smtp.starttls.enable: true
+#    properties.mail.smtp.starttls.required: true
+#    properties.mail.smtp.ssl.enable: true
+#    default-encoding: utf-8

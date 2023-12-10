@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<it315:书架 xmlns:it315="https://www.itheima.com/xmlbook/schema">
+    <it315:书>
+        <it315:书名> Java基础案例教程</it315:书名>
+        <it315:作者>黑马程序员</it315:作者>
+        <it315:售价>54.00元</it315:售价>
+    </it315:书>
+</it315:书架>
