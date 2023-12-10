@@ -23,7 +23,7 @@
 
 - perk: springboot project directory
 
-- previous sources & edition_2: project preparation data and the second version modified from the final version (unreleased)
+- previous sources & edition_2: project preparation data and the second version modified from the final version (unreleased),including teacher's handout
 
 - screenshots: screenshot of the picture in the report
 
