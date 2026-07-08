@@ -43,12 +43,6 @@
         })
       },
     },
-    watch: {
-      tableData() {
-        deep: true,
-          this.load()
-      }
-    },
     computed: {
       readTableData() { // 只展示当前用户的账单信息
         return this.tableData.filter(item => {

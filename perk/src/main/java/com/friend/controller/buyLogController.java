@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/buyLog")
 public class buyLogController {
     public final buyLogService buyLogservice;

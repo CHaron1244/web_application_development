@@ -23,7 +23,6 @@
       </el-table-column>
       <el-table-column prop="goodSale" label="GOOD SALE" align="center"></el-table-column>
       <el-table-column prop="goodInfo" label="GOOD INFORMATION" align="center"></el-table-column>
-      </el-table-column>
       <el-table-column prop="goodType" label="GOOD TYPE" align="center"></el-table-column>
       <el-table-column label="OPERATION" align="center">
         <template slot-scope="scope">
@@ -183,12 +182,6 @@ export default {
       setTimeout(() => {
         this.dialogVisible = true // 提醒用户会产生browse log
       }, 1000)
-    }
-  },
-  watch: {
-    tableData () {
-      deep: true,
-      this.load()
     }
   },
   computed: {

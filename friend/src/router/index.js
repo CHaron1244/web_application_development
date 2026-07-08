@@ -13,6 +13,8 @@ import Register from '../views/Register' // 注册页面
 import allPersonInfo from '../views/AllPersonInfo'
 Vue.use(VueRouter)
 
+const runtimeConfig = window.server || {}
+
 const originalPush = VueRouter.prototype.push
 
 VueRouter.prototype.push = function push(location) { // 解决控制台navigation冗余报错的问题
@@ -85,7 +87,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to, from, next) => {
   if (to.path == '/alipay/pay') {
-    window.location.href = 'http://114.132.219.217:9090/alipay/pay'// 修改跳转的目标地址为9090端口 modify
+    window.location.href = runtimeConfig.alipayPayUrl || '/api/alipay/pay'
   } else {
     // 其他路径保持不变
     next()

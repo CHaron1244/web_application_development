@@ -80,12 +80,6 @@
         })
       },
       checkout(index, row) {
-        const form = {
-          userAccount: row.userAccount,
-          goodName: row.goodName,
-          goodNumber: row.goodNumber,
-          orderTime: this.currentTime
-        }
         // console.log('this.dayjs().format("YYYY-MM-DD HH:mm:ss")  '+dayjs().format("YYYY-MM-DD HH:mm:ss"))
         this.$confirm('Are you sure to check out the bill?', 'NOTICE', {
           confirmButtonText: 'Confirm',
@@ -93,6 +87,12 @@
           type: 'warning'
         }).then(() => {
           this.currentTime = dayjs().format("YYYY-MM-DD HH:mm:ss")
+          const form = {
+            userAccount: row.userAccount,
+            goodName: row.goodName,
+            goodNumber: row.goodNumber,
+            orderTime: this.currentTime
+          }
           axios.post('/bill/addBill', form).then(res => {
             this.$message({
               type: 'success',
@@ -174,12 +174,6 @@
       },
       submitToAlipay(index, row) {
         this.$router.push('/alipay/pay')
-      }
-    },
-    watch: {
-      tableData() {
-        deep: true,
-          this.load()
       }
     },
     computed: {

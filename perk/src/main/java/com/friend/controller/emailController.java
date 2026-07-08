@@ -3,8 +3,6 @@ package com.friend.controller;
 import com.friend.config.Result;
 import com.friend.entity.BuyLog;
 import com.friend.entity.User;
-import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,15 +15,13 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/email")
 public class emailController {
 
-    @Autowired
-    public userController usercontroller;
-    @Autowired
-    public JavaMailSender jms;
+    private final userController usercontroller;
+    private final JavaMailSender jms;
 
     @Value("${spring.mail.from}")
     private String from;
 
-    public emailController(userController usercontroller,JavaMailSender jms) {
+    public emailController(userController usercontroller, JavaMailSender jms) {
         this.usercontroller = usercontroller;
         this.jms = jms;
     }

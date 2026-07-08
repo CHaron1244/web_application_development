@@ -1,23 +1,24 @@
 package com.friend.controller;
 
-import cn.hutool.core.lang.UUID;
-import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.friend.entity.AlipayBean;
-import com.friend.service.goodService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Random;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/alipay")
 public class AlipayController {
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     //获取配置文件中的配置信息
     //应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
@@ -54,24 +55,29 @@ public class AlipayController {
 
     private final String format = "json";
 
-    private goodService goodservice;
-
     //PC网页段支付，返回的是支付宝账号的登录页面
     @RequestMapping("/pay")
     @ResponseBody
-    public String pay(AlipayBean alipayBean) throws AlipayApiException {
-        //模拟数据
-        alipayBean.setOut_trade_no(UUID.randomUUID().toString().replaceAll("-", ""));
-        alipayBean.setSubject("PAY YOUR BILL"); // Order name需要改成真实的商品名称
-        alipayBean.setTotal_amount(String.valueOf(new Random().nextInt(100))); // 这是需要改成真实的交易金额,且传递的是String类型
-        alipayBean.setBody("good description"); // good description需要改成真实的商品描述
+    public String pay(AlipayBean alipayBean) throws AlipayApiException, JsonProcessingException {
+        if (!StringUtils.hasText(alipayBean.getOut_trade_no())) {
+            alipayBean.setOut_trade_no(UUID.randomUUID().toString().replace("-", ""));
+        }
+        if (!StringUtils.hasText(alipayBean.getSubject())) {
+            alipayBean.setSubject("PAY YOUR BILL");
+        }
+        if (!StringUtils.hasText(alipayBean.getTotal_amount())) {
+            alipayBean.setTotal_amount("0.01");
+        }
+        if (!StringUtils.hasText(alipayBean.getBody())) {
+            alipayBean.setBody("good description");
+        }
 
         AlipayClient alipayClient = new DefaultAlipayClient(gatewayUrl, appId, privateKey, format, charset, publicKey, signType);
         //PC网页支付使用AlipayTradePagePayRequest传参，下面调用的是pageExecute方法
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
         alipayRequest.setReturnUrl(returnUrl);
         alipayRequest.setNotifyUrl(notifyUrl);
-        alipayRequest.setBizContent(JSON.toJSONString(alipayBean));
+        alipayRequest.setBizContent(OBJECT_MAPPER.writeValueAsString(alipayBean));
 
         // 调用SDK生成表单
         String result = alipayClient.pageExecute(alipayRequest).getBody();

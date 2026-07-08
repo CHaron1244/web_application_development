@@ -44,12 +44,6 @@
         })
       },
     },
-    watch: {
-      tableData() {
-        deep: true,
-          this.load()
-      }
-    },
     computed: {
       readTableData() {
         return this.tableData.filter(item => {

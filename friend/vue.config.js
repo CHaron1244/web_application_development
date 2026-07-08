@@ -1,4 +1,6 @@
-const {defineConfig} = require('@vue/cli-service')
+const { defineConfig } = require('@vue/cli-service')
+const apiProxyTarget = process.env.VUE_APP_API_PROXY_TARGET || 'http://localhost:9090'
+
 module.exports = defineConfig({
   publicPath: './',
   lintOnSave: false, // lintOnSave:false用来关闭烦人的报错信息·
@@ -10,7 +12,7 @@ module.exports = defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://114.132.219.217:9090',
+        target: apiProxyTarget,
         secure: true,
         ws: true,
         changeOrigin: true,

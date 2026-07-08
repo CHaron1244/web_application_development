@@ -14,8 +14,9 @@ Vue.prototype.$dayjs = dayjs
 Vue.use(ElementUI, { locale }) // 使用英文组件
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
-axios.defaults.baseURL = 'http://114.132.219.217:9090/'
+const runtimeConfig = window.server || {}
+axios.defaults.baseURL = runtimeConfig.apiBaseUrl || process.env.VUE_APP_API_BASE_URL || '/api'
+axios.defaults.timeout = 10000
 Vue.prototype.$axios = axios
 Vue.prototype.$http = axios
 new Vue({

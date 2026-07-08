@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/good")
 public class goodController {
     private final goodService goodservice;
@@ -60,7 +59,6 @@ public class goodController {
         for(Good good : goods) {
             income += good.getGoodSale()*good.getGoodPrice();
         }
-        System.out.println("income = " + income);
         return Result.success(income);
     }
 }

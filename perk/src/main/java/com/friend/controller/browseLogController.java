@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/browseLog")
 public class browseLogController {
     private final browseLogService browseLogservice;

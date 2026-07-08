@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/user")
 public class userController {
     private final userService userservice;
@@ -21,24 +20,26 @@ public class userController {
 
     @RequestMapping("/login")
     public Result<?> login(@RequestBody User user) {
+        if (user == null || user.getUserAccount() == null || user.getUserPassword() == null) {
+            return Result.error("1", "Illegal User !");
+        }
         String account = user.getUserAccount();
         String password = user.getUserPassword();
-        List<User> users = this.userservice.selectAllUsers();
-        for (User user1 : users) {
-            if (account.equals(user1.getUserAccount()) && password.equals(user1.getUserPassword())) {
-                return Result.success(user);
-            }
+        User dbUser = this.userservice.selectByAccount(account);
+        if (dbUser != null && password != null && password.equals(dbUser.getUserPassword())) {
+            return Result.success(dbUser);
         }
         return Result.error("1", "Illegal User !");
     }
 
     @PostMapping("/register")
     public Result<?> register(@RequestBody User user) {
-        List<User> users = this.userservice.selectAllUsers();
-        for (User user1 : users) {
-            if (user.getUserAccount().equals(user1.getUserAccount())) {
-                return Result.error("1", "User already registered");
-            }
+        if (user == null || user.getUserAccount() == null) {
+            return Result.error("1", "Illegal User !");
+        }
+        User dbUser = this.userservice.selectByAccount(user.getUserAccount());
+        if (dbUser != null) {
+            return Result.error("1", "User already registered");
         }
         userservice.addUser(user);
         return Result.success();

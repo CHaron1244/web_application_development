@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%;height: 100vh;background-color: powderblue; overflow: hidden" id="building">
     <div style="width: 600px;margin:40px auto">
-      <img src="imgs\CentralPerk.png" alt="CENTRAL PERK">
+      <img src="../../src/assets/imgs/CentralPerk.png" alt="CENTRAL PERK">
       <div style="color: red ;font-size: 30px;text-align: center;padding: 30px 0">
         Welcome to GUNTHER'S CENTRAL PERK Registration Center
       </div>
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-  import { Message, MessageBox } from 'element-ui';
   import axios from 'axios'
   export default {
     name: "Register",
@@ -73,8 +72,8 @@
               } else {
                 this.$message.error(res.data.msg);
               }
-            }).catch(error => {
-              this.$message.error(res.data.msg);
+            }).catch(() => {
+              this.$message.error('Register request failed, please check the backend service.');
             })
           } else {
             this.$message.error('Error submit! Please check your input information!');

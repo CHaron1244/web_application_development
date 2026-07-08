@@ -70,29 +70,19 @@
         this.$router.push("/register")
       },
       login() { // 登录方法
-        axios.get(`/user/selectByAccount/${this.ruleForm.userAccount}`).then(res => {
-          const data = res.data.data
-          this.ruleForm.userEmail = data.userEmail
-          this.ruleForm.userRole = data.userRole
-        }).catch(error => {
-          this.$message({
-            type: "error",
-            message: 'Illegal User!No such user account!'
-          })
-        })
-        let str = sessionStorage.getItem("user") || "{}"
         this.$refs["ruleForm"].validate((valid) => { // 对表单进行验证
           if (valid) { // 如果验证通过
             axios.post("/user/login", this.ruleForm).then(res => { // 向服务器发送登录请求 返回的是Result,里面data是null res.data才是Result
               if (res.data.code == '0') { // 如果登录成功
+                const user = res.data.data
                 this.$message({
                   type: "success",
-                  message: `login in successfully!Welcome to Gunther's Central Perk,${res.data.data.userAccount}!`
+                  message: `login in successfully!Welcome to Gunther's Central Perk,${user.userAccount}!`
                 })
-                sessionStorage.setItem("user", JSON.stringify(this.ruleForm))  // 缓存用户信息
-                if (this.ruleForm.userRole == 0) {
+                sessionStorage.setItem("user", JSON.stringify(user))  // 缓存用户信息
+                if (user.userRole == 0) {
                   this.$router.push("/customer")//跳转到用户
-                } else if (this.ruleForm.userRole == 1) {
+                } else if (user.userRole == 1) {
                   this.$router.push("/good")//跳转到商品管理
                 }
               } else {
@@ -101,6 +91,11 @@
                   message: 'Wrong account or wrong password, fail to login to!'
                 })
               }
+            }).catch(() => {
+              this.$message({
+                type: "error",
+                message: 'Login request failed, please check the backend service.'
+              })
             })
           } else { // 如果验证不通过
             this.$message({
@@ -110,7 +105,7 @@
           }
         })
       }
-    },
+    }
   }
 </script>
 
